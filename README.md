@@ -107,33 +107,36 @@ Network Name: NatNetwork
 IPv4 Prefix:  10.0.0.0/24
 DHCP:         Enabled
 IPv6:         Disabled
+```
 https://2-screenshot-network-settings-1.png/
 
 A NAT Network was chosen because it allows multiple VMs to communicate with each other while also having outbound internet access.
 
-Step 4. Import Kali Linux
+## Step 4. Import Kali Linux
 The Kali Linux VM was downloaded and imported into VirtualBox. The network adapter was configured as follows:
 
-text
+```text
 Adapter 1
 Attached to: NAT Network
 Network:     NatNetwork
 Adapter Type: Intel PRO/1000 MT Desktop
+```
 https://3-screenshot-kali-linux.png/
 
 A shared folder was also configured to transfer files between the host and the Kali VM.
 
-Step 5. Configure the Kali Linux Network
+## Step 5. Configure the Kali Linux Network
 A static IP address was configured for Kali Linux:
 
-text
+```text
 IP Address: 10.0.0.2
 Subnet Mask: 255.255.255.0
 Gateway: 10.0.0.1
 DNS: 8.8.8.8
+```
 https://4-screenshot-kali-network-settings.png/
 
-Step 6. Create a Clean VM Snapshot
+## Step 6. Create a Clean VM Snapshot
 After completing the setup, a snapshot was created with the name Clean Kali - Network Setup. This serves as a baseline for future exercises.
 
 🔎 Lab Verification
@@ -146,10 +149,12 @@ After completing the setup, a snapshot was created with the name Clean Kali - Ne
 🔄 Verify snapshot	Restore snapshot and run ip a	Baseline configuration restored
 Example Results:
 
-text
+```text
 IP Address: 10.0.0.2/24
 Gateway:    10.0.0.1
 DNS:        8.8.8.8
+```
+
 🐞 Problems Encountered & Solutions
 Problem 1: Internet Connectivity Issue in Kali Linux
 After setting the static IP, Kali Linux lost its internet connection. This is a known issue with VirtualBox v7 and Kali Linux 2026.1 or newer.
@@ -158,10 +163,11 @@ Solution:
 
 The following commands were used to fix the issue:
 
-bash
+```bash
 sudo nmcli connection modify "Wired connection 1" ipv4.dad-timeout 0
 sudo nmcli connection down "Wired connection 1"
 sudo nmcli connection up "Wired connection 1"
+```
 Note: The connection name may vary. I identified my active connection using nmcli connection show before running the commands.
 
 Problem 2: VirtualBox VT-x / Virtualization Error
