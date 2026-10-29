@@ -192,8 +192,8 @@ After restoring the Kali VM from a snapshot, `ping 10.0.0.1` returned "Destinati
 - **Documentation matters:** Recording exact commands, settings, and the problems hit along the way makes the project a highly useful reference.
 
 ---
-
-<br># 🔐 Security & Ethical Use
+<br>
+# 🔐 Security & Ethical Use
 This lab is intended strictly for educational purposes on machines and networks I own. It is not to be used against systems without explicit authorization.
 
 ---
