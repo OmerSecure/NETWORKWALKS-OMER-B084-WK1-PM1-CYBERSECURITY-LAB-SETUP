@@ -68,10 +68,12 @@ The lab creates a controlled, isolated environment where cybersecurity tools, ne
 ## Step 1. Install 7-Zip
 Installed 7-Zip to extract the Kali Linux virtual machine package, distributed as a `.7z` archive.
 
+
 ## Step 2. Install VirtualBox
 Downloaded and installed VirtualBox as the hypervisor. 
 
 *Note: The VirtualBox base installer and the Extension Pack are separate downloads — the Extension Pack alone cannot be installed without the main VirtualBox program already present.*
+
 
 ## Step 3. Create the NAT Network
 Created a dedicated NAT Network in VirtualBox (**File → Tools → Network → NAT Networks**):
@@ -86,6 +88,7 @@ DHCP:         Enabled
 
 A NAT Network (rather than plain NAT) was used because it allows multiple VMs attached to the same network to communicate with each other while still having outbound internet access — necessary for future multi-VM pentesting exercises.
 
+
 ## Step 4. Import Kali Linux
 Downloaded the official Kali Linux VirtualBox image from kali.org/get-kali and imported it into VirtualBox using **File → Open** (imported directly as an existing VM rather than through the Import Appliance wizard, since the download was already in VirtualBox's native format).
 
@@ -99,6 +102,7 @@ RAM:          2048 MB
 
 <img src="2-screenshot-kali-nat-network.jpg" alt="Kali Linux VM NAT Network" width="800" />
 
+
 ## Step 5. Configure the Kali Linux Network
 Set a manual static IP on Kali via **Wired Connection 1** → **IPv4 Settings**:
 
@@ -110,13 +114,13 @@ DNS:          8.8.8.8
 ```
 
 Applied the change using:
-
 ```bash
 sudo nmcli connection down "Wired connection 1"
 sudo nmcli connection up "Wired connection 1"
 ```
 
 <img src="3-screenshot-kali-network-settings-IPV4.jpg" alt="Kali Linux VM IPV4 Settings" width="1680" height="1007" />
+
 
 ## Step 6. Create a Clean VM Snapshot
 After verifying the setup worked, took a VirtualBox snapshot to preserve this known-good baseline:
@@ -144,7 +148,6 @@ This baseline can be restored if a future exercise breaks the configuration.
 
 # 🐞 Problems Encountered & Solutions
 Documenting problems and their fixes is a crucial part of the learning process.
-
 
 ## Problem 1. Extension Pack Downloaded Instead of Main Installer
 Initially downloaded only the VirtualBox Extension Pack from the downloads page, mistaking the "**Accept and download**" button for the actual VirtualBox installer.
@@ -181,6 +184,7 @@ After restoring the Kali VM from a snapshot, `ping 10.0.0.1` returned "Destinati
 <br>
 
 # 💡 What I Learned
+
 - **NAT vs. NAT Network:** A NAT Network lets multiple VMs on the same virtual network talk to each other while still reaching the internet, which regular NAT does not support. This is essential for a multi-machine lab.
 
 - **Static IP configuration on Linux:** How to set and verify manual IPv4 addressing using the GUI and `nmcli`, and how connection changes sometimes need to be manually re-applied to take effect.
@@ -193,6 +197,7 @@ After restoring the Kali VM from a snapshot, `ping 10.0.0.1` returned "Destinati
 
 ---
 <br>
+
 # 🔐 Security & Ethical Use
 This lab is intended strictly for educational purposes on machines and networks I own. It is not to be used against systems without explicit authorization.
 
