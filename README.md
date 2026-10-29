@@ -66,6 +66,7 @@ Installed 7-Zip to extract the Kali Linux virtual machine package, distributed a
 
 ## Step 2. Install VirtualBox
 Downloaded and installed VirtualBox as the hypervisor. 
+
 *Note: The VirtualBox base installer and the Extension Pack are separate downloads — the Extension Pack alone cannot be installed without the main VirtualBox program already present.*
 
 ## Step 3. Create the NAT Network
@@ -76,9 +77,8 @@ Network Name: NatNetwork
 IPv4 Prefix:  10.0.0.0/24
 DHCP:         Enabled
 ```
-<img src="1-screenshot-network-settings.jpg" alt="NAT Network Settings" width="800" />
 
-<img src="1-screenshot-network-settings.jpg" alt="NAT Network Settings" width="786" height="791" />
+<img src="1-screenshot-network-settings.jpg" alt="NAT Network Settings" width="800" />
 
 A NAT Network (rather than plain NAT) was used because it allows multiple VMs attached to the same network to communicate with each other while still having outbound internet access — necessary for future multi-VM pentesting exercises.
 
@@ -93,9 +93,7 @@ Adapter Type: Intel PRO/1000 MT Desktop
 RAM:          2048 MB
 ```
 
-<img src="2-screenshot-kali-nat-network.jpg" alt="Kali Linux VM Settings" width="800" />
-
-<img src="2-screenshot-kali-nat-network.jpg" alt="Kali Linux VM NAT Network" width="792" height="870" />
+<img src="2-screenshot-kali-nat-network.jpg" alt="Kali Linux VM NAT Network" width="800" />
 
 ## Step 5. Configure the Kali Linux Network
 Set a manual static IP on Kali via **Wired Connection 1** → **IPv4 Settings**:
@@ -113,8 +111,6 @@ Applied the change using:
 sudo nmcli connection down "Wired connection 1"
 sudo nmcli connection up "Wired connection 1"
 ```
-
-<img src="3-screenshot-kali-network-settings-IPV4.jpg" alt="Kali Linux VM IPV4 Settings" width="800" />
 
 <img src="3-screenshot-kali-network-settings-IPV4.jpg" alt="Kali Linux VM IPV4 Settings" width="1680" height="1007" />
 
@@ -135,8 +131,6 @@ This baseline can be restored if a future exercise breaks the configuration.
 | 🌐 Check IP address | `ip a`              | `10.0.0.2/24` confirmed on eth0
 | 📡 Test gateway    | `ping -c 4 10.0.0.1` | 4/4 replies, 0% packet loss
 | 🌍 Test DNS + internet | `ping -c 4 google.com`  | 4/4 replies, 0% packet loss
-
-<img src="4-screenshot-lab-verification.jpg" width="800" />
 
 <img src="4-screenshot-lab-verification.jpg" alt="Lab Verification Terminal" width="1680" height="1012" />
 
