@@ -211,7 +211,9 @@ This lab is intended strictly for educational purposes on machines and networks 
 # 👤 Author
 
 **Omer Bawazir**.
+
 Cybersecurity Graduate — Batch B084.
+
 NetworkWalks Academy.
 
 **LinkedIn:** https://www.linkedin.com/in/OmerSecure
