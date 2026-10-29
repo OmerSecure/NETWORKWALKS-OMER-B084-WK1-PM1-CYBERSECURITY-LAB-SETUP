@@ -21,6 +21,7 @@
 </p>
 
 ---
+<br>
 
 ## 📌 Project Overview
 
@@ -29,6 +30,7 @@ This project focuses on setting up a **virtual cybersecurity and penetration-tes
 The lab creates a controlled, isolated environment where cybersecurity tools, network scanning, reconnaissance, and other security-testing activities can be performed safely without putting the real host machine or home network at risk. The lab runs on a private virtual network so that additional machines (Windows, Android, Server 2016) can be added in future weeks and used as practice targets.
 
 ---
+<br>
 
 ## 🎯 Objectives
 
@@ -41,6 +43,7 @@ The lab creates a controlled, isolated environment where cybersecurity tools, ne
 - Document the complete setup process, including problems and fixes.
 
 ---
+<br>
 
 ## ⚙️ Lab Configuration
 
@@ -58,6 +61,7 @@ The lab creates a controlled, isolated environment where cybersecurity tools, ne
 | 🔮 Future VM Range | `10.0.0.3 – 10.0.0.99` |
 
 ---
+<br>
 
 # 🪜 Lab Setup Procedure
 
@@ -123,6 +127,7 @@ Snapshot name: Clean setup - network configured
 This baseline can be restored if a future exercise breaks the configuration.
 
 ---
+<br>
 
 # 🔎 Lab Verification
 
@@ -135,14 +140,17 @@ This baseline can be restored if a future exercise breaks the configuration.
 <img src="4-screenshot-lab-verification.jpg" alt="Lab Verification Terminal" width="1680" height="1012" />
 
 ---
+<br>
 
 # 🐞 Problems Encountered & Solutions
 Documenting problems and their fixes is a crucial part of the learning process.
+
 
 ## Problem 1. Extension Pack Downloaded Instead of Main Installer
 Initially downloaded only the VirtualBox Extension Pack from the downloads page, mistaking the "**Accept and download**" button for the actual VirtualBox installer.
 
 Fix: The main installer is a separate link under "**VirtualBox Platform Packages**" → **Windows hosts**. The Extension Pack is only installed after VirtualBox itself.
+
 
 ## Problem 2. Network Disconnect Popup While Editing IPv4 Settings
 On Kali 2026.2, switching to manual IP configuration triggered a repeating "network connection disconnected" popup.
@@ -151,6 +159,7 @@ On Kali 2026.2, switching to manual IP configuration triggered a repeating "netw
 ```bash
 sudo nmcli connection modify "Wired connection 1" ipv4.dad-timeout 0
 ```
+
 
 ## Problem 3. Static IP Not Applying (Still Showing DHCP)
 After saving the manual IPv4 settings, `ip a` still showed a dynamically assigned address instead of the static one.
@@ -162,12 +171,14 @@ sudo nmcli connection down "Wired connection 1"
 sudo nmcli connection up "Wired connection 1"
 ```
 
+
 ## Problem 4. Gateway Unreachable After Snapshot Restore
 After restoring the Kali VM from a snapshot, `ping 10.0.0.1` returned "Destination Host Unreachable" even though the network adapter settings looked correct.
 
 **Fix:** Disconnected and reconnected the virtual network cable from within the running VM **(Devices → Network → Disconnect/Connect Network Cable)**, which refreshed the adapter and restored connectivity.
 
 ---
+<br>
 
 # 💡 What I Learned
 - **NAT vs. NAT Network:** A NAT Network lets multiple VMs on the same virtual network talk to each other while still reaching the internet, which regular NAT does not support. This is essential for a multi-machine lab.
@@ -181,11 +192,13 @@ After restoring the Kali VM from a snapshot, `ping 10.0.0.1` returned "Destinati
 - **Documentation matters:** Recording exact commands, settings, and the problems hit along the way makes the project a highly useful reference.
 
 ---
+<br>
 
 # 🔐 Security & Ethical Use
 This lab is intended strictly for educational purposes on machines and networks I own. It is not to be used against systems without explicit authorization.
 
 ---
+<br>
 
 # 🔗 Tools & Resources
 - **7-Zip:** https://7-zip.org/download.html
@@ -193,21 +206,26 @@ This lab is intended strictly for educational purposes on machines and networks 
 - **Kali Linux:** https://kali.org/get-kali
 
 ---
+<br>
 
 # 👤 Author
-**Omer Bawazir**
-Cybersecurity Graduate — Batch B084
-NetworkWalks Academy
+
+**Omer Bawazir**.
+Cybersecurity Graduate — Batch B084.
+NetworkWalks Academy.
 
 **LinkedIn:** https://www.linkedin.com/in/OmerSecure
 
 ---
+<br>
 
 # 📌 Project Information
 
-**Program:** Cybersecurity Program
-**Week:** 01
-**Project:** Cybersecurity & Pentesting Lab Setup
-**Organization:** NetworkWalks Academy
+**Program:** Cybersecurity Program.
+**Week:** 01.
+**Project:** Cybersecurity & Pentesting Lab Setup.
+**Organization:** NetworkWalks Academy.
 
 ---
+
+
