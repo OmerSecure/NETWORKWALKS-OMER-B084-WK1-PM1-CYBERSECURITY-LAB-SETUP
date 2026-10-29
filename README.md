@@ -24,48 +24,21 @@
 
 ## 📌 Project Overview
 
-This project documents the setup of a **virtual cybersecurity and penetration-testing laboratory** using VirtualBox and Kali Linux. 
+This project focuses on setting up a **virtual cybersecurity and penetration-testing laboratory** using VirtualBox and Kali Linux.
 
-The goal was to create a controlled, isolated environment where security tools, network scanning, and vulnerability assessment can be practiced safely. The lab is built on a private virtual network, allowing for the addition of target machines in future exercises.
+The lab creates a controlled, isolated environment where cybersecurity tools, network scanning, reconnaissance, and other security-testing activities can be performed safely without putting the real host machine or home network at risk. The lab runs on a private virtual network so that additional machines (Windows, Android, Server 2016) can be added in future weeks and used as practice targets.
 
 ---
 
 ## 🎯 Objectives
 
-The main objectives of this project were to:
-
 - Install and configure VirtualBox.
-- Import and configure Kali Linux as a virtual machine.
 - Create a private **NAT Network** (`10.0.0.0/24`) for the lab.
+- Import and configure Kali Linux as a virtual machine.
 - Assign a static IP address (`10.0.0.2/24`) to the Kali VM.
-- Enable clipboard sharing and file drag-and-drop.
-- Set up a shared folder (`/downloads`) between the host and Kali.
 - Verify network connectivity and DNS resolution.
 - Take a clean VM snapshot for recovery.
-- Document the entire process with screenshots and explanations.
-
----
-
-## 🛡️ Purpose of the Lab
-
-The lab provides an isolated environment for cybersecurity learning and authorized security testing. It can be used for activities such as:
-
-- Network reconnaissance
-- Port scanning (e.g., with Nmap)
-- Vulnerability assessment
-- Packet analysis (e.g., with Wireshark)
-- Web security testing
-- Exploitation practice (e.g., with Metasploit)
-
-⚠️ **Important:** This laboratory must only be used for systems that you own or have explicit permission to test. Unauthorized access is illegal.
-
----
-
-## 🏗️ Lab Architecture
-
-![](1-screenshot-title-image.png)
-
-The lab is built on a **NAT Network** (`10.0.0.0/24`). The Kali Linux VM is assigned `10.0.0.2`. Additional target machines (Windows, Android, etc.) can be added later to the same network.
+- Document the complete setup process, including problems and fixes.
 
 ---
 
@@ -73,10 +46,8 @@ The lab is built on a **NAT Network** (`10.0.0.0/24`). The Kali Linux VM is assi
 
 | 🧩 Component       | ⚙️ Configuration   |
 | ------------------ | ------------------ |
-| 🖥️ Host OS         | Windows 11         |
-| 🧠 Host RAM        | 16 GB              |
-| ⚡ Processor       | Intel Core i7      |
-| 🧰 Hypervisor      | VirtualBox 7.2     |
+| 🖥️ Host OS         | Windows 10 / 11    |
+| 🧰 Hypervisor      | VirtualBox         |
 | 🐉 Security OS     | Kali Linux 2026.2  |
 | 🧠 Kali RAM        | 2048 MB            |
 | 🌐 Virtual Network | NAT Network        |
@@ -84,152 +55,165 @@ The lab is built on a **NAT Network** (`10.0.0.0/24`). The Kali Linux VM is assi
 | 🐧 Kali IP Address | `10.0.0.2/24`      |
 | 🚪 Default Gateway | `10.0.0.1`         |
 | 🌍 DNS Server      | `8.8.8.8`          |
-| 🔮 Future VM Range | `10.0.0.3–10.0.0.99` |
+| 🔮 Future VM Range | `10.0.0.3 – 10.0.0.99` |
 
 ---
 
 # 🪜 Lab Setup Procedure
 
 ## Step 1. Install 7-Zip
-
-7-Zip was installed to extract the Kali Linux virtual-machine package.
+Installed 7-Zip to extract the Kali Linux virtual machine package, distributed as a `.7z` archive.
 
 ## Step 2. Install VirtualBox
-
-VirtualBox was installed as the hypervisor.
+Downloaded and installed VirtualBox as the hypervisor. 
+*Note: The VirtualBox base installer and the Extension Pack are separate downloads — the Extension Pack alone cannot be installed without the main VirtualBox program already present.*
 
 ## Step 3. Create the NAT Network
-
-A dedicated NAT Network was created with the following settings:
+Created a dedicated NAT Network in VirtualBox (**File → Tools → Network → NAT Networks**):
 
 ```text
 Network Name: NatNetwork
 IPv4 Prefix:  10.0.0.0/24
 DHCP:         Enabled
-IPv6:         Disabled
 ```
-https://2-screenshot-network-settings-1.png/
+<img src="1-screenshot-network-settings.jpg" alt="NAT Network Settings" width="800" />
 
-A NAT Network was chosen because it allows multiple VMs to communicate with each other while also having outbound internet access.
+<img src="1-screenshot-network-settings.jpg" alt="NAT Network Settings" width="786" height="791" />
+
+A NAT Network (rather than plain NAT) was used because it allows multiple VMs attached to the same network to communicate with each other while still having outbound internet access — necessary for future multi-VM pentesting exercises.
 
 ## Step 4. Import Kali Linux
-The Kali Linux VM was downloaded and imported into VirtualBox. The network adapter was configured as follows:
+Downloaded the official Kali Linux VirtualBox image from kali.org/get-kali and imported it into VirtualBox using **File → Open** (imported directly as an existing VM rather than through the Import Appliance wizard, since the download was already in VirtualBox's native format).
 
 ```text
 Adapter 1
-Attached to: NAT Network
-Network:     NatNetwork
+Attached to:  NAT Network
+Network:      NatNetwork
 Adapter Type: Intel PRO/1000 MT Desktop
+RAM:          2048 MB
 ```
-https://3-screenshot-kali-linux.png/
 
-A shared folder was also configured to transfer files between the host and the Kali VM.
+<img src="2-screenshot-kali-nat-network.jpg" alt="Kali Linux VM Settings" width="800" />
+
+<img src="2-screenshot-kali-nat-network.jpg" alt="Kali Linux VM NAT Network" width="792" height="870" />
 
 ## Step 5. Configure the Kali Linux Network
-A static IP address was configured for Kali Linux:
+Set a manual static IP on Kali via **Wired Connection 1** → **IPv4 Settings**:
 
 ```text
-IP Address: 10.0.0.2
-Subnet Mask: 255.255.255.0
-Gateway: 10.0.0.1
-DNS: 8.8.8.8
-```
-https://4-screenshot-kali-network-settings.png/
-
-## Step 6. Create a Clean VM Snapshot
-After completing the setup, a snapshot was created with the name Clean Kali - Network Setup. This serves as a baseline for future exercises.
-
-🔎 Lab Verification
-✅ Test	🧾 Command	🎯 Expected Result
-🌐 Check IP address	ip a	10.0.0.2/24 displayed
-📡 Test gateway	ping 10.0.0.1	Successful replies
-🌍 Test Internet connectivity	ping 8.8.8.8	Successful replies
-🔎 Test DNS resolution	nslookup networkwalks.com	Domain resolves
-🧰 Verify Nmap	nmap --version	Nmap version displayed
-🔄 Verify snapshot	Restore snapshot and run ip a	Baseline configuration restored
-Example Results:
-
-```text
-IP Address: 10.0.0.2/24
-Gateway:    10.0.0.1
-DNS:        8.8.8.8
+IP Address:   10.0.0.2
+Subnet Mask:  24
+Gateway:      10.0.0.1
+DNS:          8.8.8.8
 ```
 
-🐞 Problems Encountered & Solutions
-Problem 1: Internet Connectivity Issue in Kali Linux
-After setting the static IP, Kali Linux lost its internet connection. This is a known issue with VirtualBox v7 and Kali Linux 2026.1 or newer.
-
-Solution:
-
-The following commands were used to fix the issue:
+Applied the change using:
 
 ```bash
-sudo nmcli connection modify "Wired connection 1" ipv4.dad-timeout 0
 sudo nmcli connection down "Wired connection 1"
 sudo nmcli connection up "Wired connection 1"
 ```
-Note: The connection name may vary. I identified my active connection using nmcli connection show before running the commands.
 
-Problem 2: VirtualBox VT-x / Virtualization Error
-The VM failed to start initially because hardware virtualization was disabled in the BIOS.
+<img src="3-screenshot-kali-network-settings-IPV4.jpg" alt="Kali Linux VM IPV4 Settings" width="800" />
 
-Solution:
+<img src="3-screenshot-kali-network-settings-IPV4.jpg" alt="Kali Linux VM IPV4 Settings" width="1680" height="1007" />
 
-Restarted the computer and entered the BIOS/UEFI settings.
+## Step 6. Create a Clean VM Snapshot
+After verifying the setup worked, took a VirtualBox snapshot to preserve this known-good baseline:
 
-Enabled Intel VT-x / Hardware Virtualization.
-
-Saved the changes and restarted.
-
-The VM started successfully.
-
-💡 What I Learned
-This project gave me hands-on experience in building a virtual lab from scratch. Key takeaways include:
-
-NAT Network vs. NAT: A NAT Network allows multiple VMs to communicate with each other, which is essential for a multi-machine lab.
-
-Static IP Configuration: I learned how to configure and verify IPv4 settings in Kali Linux.
-
-VM Snapshots: Creating a clean snapshot before any risky activity is crucial for easy recovery.
-
-Troubleshooting: I encountered real-world networking issues and learned how to resolve them using nmcli and BIOS settings.
-
-Documentation: Writing clear, structured documentation is a vital professional skill.
-
-🔐 Security & Ethical Use
-This laboratory is intended strictly for educational purposes.
-
-🔗 Tools & Resources
-7-Zip: https://7-zip.org/download.html
-
-VirtualBox: https://virtualbox.org/wiki/Downloads
-
-Kali Linux: https://kali.org/get-kali
-
-👤 Author
-Omer Bawazir
-Cybersecurity Graduate | B084
-
-LinkedIn: https://www.linkedin.com/in/OmerSecure
-
-📌 Project Information
-Program Name: Cybersecurity at Networkwalks | Week: 01 | Project: Cybersecurity & Pentesting Lab Setup | Repository: GitHub
-
-text
+```text
+Snapshot name: Clean setup - network configured
+```
+This baseline can be restored if a future exercise breaks the configuration.
 
 ---
 
-### 📸 خطوات مهمة لإكمال المستودع
+# 🔎 Lab Verification
 
-1. **أضف الصور:** يجب أن ترفع الصور التالية إلى نفس المستودع (بجانب ملف `README.md`):
-   - `1-screenshot-title-image.png` (صورة عامة للمختبر أو شاشة VirtualBox).
-   - `2-screenshot-network-settings-1.png` (صورة إعدادات NAT Network في VirtualBox).
-   - `3-screenshot-kali-linux.png` (صورة لشاشة Kali Linux تعمل).
-   - `4-screenshot-kali-network-settings.png` (صورة لمخرجات أمر `ip a` أو إعدادات الشبكة في Kali).
-   *تأكد من أن أسماء الصور مطابقة تماماً لما هو مكتوب في ملف `README.md` لكي تظهر تلقائياً.*
+| ✅ Test            | 🧾 Command        | 🎯 Result
+| ------------------ | ------------------ | ------------------ |
+| 🌐 Check IP address | `ip a`              | `10.0.0.2/24` confirmed on eth0
+| 📡 Test gateway    | `ping -c 4 10.0.0.1` | 4/4 replies, 0% packet loss
+| 🌍 Test DNS + internet | `ping -c 4 google.com`  | 4/4 replies, 0% packet loss
 
-2. **تحقق من الروابط:** تأكد من أن رابط LinkedIn الخاص بك صحيح، وأن اسم المستودع مطابق للصيغة المعتمدة.
+<img src="4-screenshot-lab-verification.jpg" width="800" />
 
-3. **التسليم:** بعد رفع كل شيء، اذهب إلى [https://networkwalks.com/submission/](https://networkwalks.com/submission/) واملأ النموذج قبل **الجمعة 11:59 مساءً بتوقيت دبي**.
+<img src="4-screenshot-lab-verification.jpg" alt="Lab Verification Terminal" width="1680" height="1012" />
 
-بالتوفيق في الأسبوع الأول! إذا احتجت مساعدة في صياغة منشور LinkedIn الخاص بهذا المشروع، أخبرني.
+---
+
+# 🐞 Problems Encountered & Solutions
+Documenting problems and their fixes is a crucial part of the learning process.
+
+## Problem 1. Extension Pack Downloaded Instead of Main Installer
+Initially downloaded only the VirtualBox Extension Pack from the downloads page, mistaking the "**Accept and download**" button for the actual VirtualBox installer.
+
+Fix: The main installer is a separate link under "**VirtualBox Platform Packages**" → **Windows hosts**. The Extension Pack is only installed after VirtualBox itself.
+
+## Problem 2. Network Disconnect Popup While Editing IPv4 Settings
+On Kali 2026.2, switching to manual IP configuration triggered a repeating "network connection disconnected" popup.
+
+**Fix:**
+```bash
+sudo nmcli connection modify "Wired connection 1" ipv4.dad-timeout 0
+```
+
+## Problem 3. Static IP Not Applying (Still Showing DHCP)
+After saving the manual IPv4 settings, `ip a` still showed a dynamically assigned address instead of the static one.
+
+**Fix:** The connection needed to be manually cycled to pick up the new settings:
+
+```bash
+sudo nmcli connection down "Wired connection 1"
+sudo nmcli connection up "Wired connection 1"
+```
+
+## Problem 4. Gateway Unreachable After Snapshot Restore
+After restoring the Kali VM from a snapshot, `ping 10.0.0.1` returned "Destination Host Unreachable" even though the network adapter settings looked correct.
+
+**Fix:** Disconnected and reconnected the virtual network cable from within the running VM **(Devices → Network → Disconnect/Connect Network Cable)**, which refreshed the adapter and restored connectivity.
+
+---
+
+# 💡 What I Learned
+- **NAT vs. NAT Network:** A NAT Network lets multiple VMs on the same virtual network talk to each other while still reaching the internet, which regular NAT does not support. This is essential for a multi-machine lab.
+
+- **Static IP configuration on Linux:** How to set and verify manual IPv4 addressing using the GUI and `nmcli`, and how connection changes sometimes need to be manually re-applied to take effect.
+
+- **Snapshots as safety nets:** Taking a snapshot at a known-working state makes it possible to recover quickly if later configuration changes (or VM corruption) break the setup.
+
+- **Troubleshooting methodically:** Working through connectivity issues layer by layer (adapter settings → NAT Network config → cable connection → DNS) rather than guessing.
+
+- **Documentation matters:** Recording exact commands, settings, and the problems hit along the way makes the project a highly useful reference.
+
+---
+
+# 🔐 Security & Ethical Use
+This lab is intended strictly for educational purposes on machines and networks I own. It is not to be used against systems without explicit authorization.
+
+---
+
+# 🔗 Tools & Resources
+- **7-Zip:** https://7-zip.org/download.html
+- **VirtualBox:** https://virtualbox.org/wiki/Downloads
+- **Kali Linux:** https://kali.org/get-kali
+
+---
+
+# 👤 Author
+**Omer Bawazir**
+Cybersecurity Graduate — Batch B084
+NetworkWalks Academy
+
+**LinkedIn:** https://www.linkedin.com/in/OmerSecure
+
+---
+
+# 📌 Project Information
+
+**Program:** Cybersecurity Program
+**Week:** 01
+**Project:** Cybersecurity & Pentesting Lab Setup
+**Organization:** NetworkWalks Academy
+
+---
