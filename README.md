@@ -192,9 +192,8 @@ After restoring the Kali VM from a snapshot, `ping 10.0.0.1` returned "Destinati
 - **Documentation matters:** Recording exact commands, settings, and the problems hit along the way makes the project a highly useful reference.
 
 ---
-<br>
 
-# 🔐 Security & Ethical Use
+<br># 🔐 Security & Ethical Use
 This lab is intended strictly for educational purposes on machines and networks I own. It is not to be used against systems without explicit authorization.
 
 ---
@@ -210,11 +209,11 @@ This lab is intended strictly for educational purposes on machines and networks 
 
 # 👤 Author
 
-**Omer Bawazir**.
+**Omer Bawazir**
 
-Cybersecurity Graduate — Batch B084.
+Cybersecurity Graduate — Batch B084
 
-NetworkWalks Academy.
+NetworkWalks Academy
 
 **LinkedIn:** https://www.linkedin.com/in/OmerSecure
 
@@ -223,10 +222,13 @@ NetworkWalks Academy.
 
 # 📌 Project Information
 
-**Program:** Cybersecurity Program.
-**Week:** 01.
-**Project:** Cybersecurity & Pentesting Lab Setup.
-**Organization:** NetworkWalks Academy.
+**Program:** Cybersecurity Program
+
+**Week:** 01
+
+**Project:** Cybersecurity & Pentesting Lab Setup
+
+**Organization:** NetworkWalks Academy
 
 ---
 
